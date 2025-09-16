@@ -2,20 +2,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchContainer = document.getElementById('search-container');
     
 
-    const filterOptions = [ "Todas las comunas","La Florida", "Lo Curro" ];
+    const filterOptionsPlaces = [ "Todas las comunas","La Florida", "Lo Curro" ];
+    const filterOptionsProducts = [ "Todos Los Productos","Fiambrería", "Lácteos"];
 
-    const optionsHTML = filterOptions.map(option => `
+    const optionsPlacesHTML = filterOptionsPlaces.map(option => `
+        <option value="${option.toLowerCase()}">${option}</option>
+    `).join('');
+
+    const optionsProductsHTML = filterOptionsProducts.map(option => `
         <option value="${option.toLowerCase()}">${option}</option>
     `).join('');
 
     const searchBarContent = `
         <div class="search-flex-container">
             <select class="filter-input">
-                ${optionsHTML}
+                ${optionsPlacesHTML}
             </select>
             <select class="filter-input">
-                <option value="departamentos">Departamentos</option>
-                <option value="casas">Casas</option>
+                ${optionsProductsHTML}
             </select>
             <div class="search-input-container">
                 <input type="text" placeholder="Ingresa comuna o ciudad">
