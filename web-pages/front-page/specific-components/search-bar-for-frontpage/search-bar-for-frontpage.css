@@ -8,9 +8,9 @@
 .search-flex-container {
     display: flex;
     align-items: center;
-    gap: 10px; /* Space between the items */
+    gap: 10px; 
     width: 100%;
-    max-width: 900px; /* Limits the container width on large screens */
+    max-width: 900px; 
 }
 
 .filter-input {
@@ -18,19 +18,19 @@
     border-radius: 5px;
     padding: 12px;
     font-size: 16px;
-    flex: 1; /* Allows it to grow and shrink */
+    flex: 1; 
 }
 
 .search-input-container {
     position: relative;
-    flex: 2; /* Gives more space to the search input */
+    flex: 2; 
 }
 
 .search-input-container input {
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 12px 40px 12px 12px; /* Extra padding for the icon */
+    padding: 12px 40px 12px 12px; 
     box-sizing: border-box;
     font-size: 16px;
 }
@@ -49,7 +49,7 @@
     background-color: #FF9800;
 
 }
-/* Responsive styles for mobile */
+
 @media (max-width: 600px) {
     .search-flex-container {
         flex-direction: column;
