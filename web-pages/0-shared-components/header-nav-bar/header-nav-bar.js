@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     </a>
                 </div>
                 <ul class="nav-container-ul">
-                    <li><a href="#" class="nav-container-a">Perfil</a></li>
-                    <li><a href="#" class="nav-container-a">Cerrar sesión</a></li>
+                    <li class="nav-container-li"><a href="#" class="nav-container-a">Perfil</a></li>
+                    <li class="nav-container-li"><a href="#" class="nav-container-a">Cerrar sesión</a></li>
                 </ul>
             </nav>
         `;
@@ -27,9 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     </a>
                 </div>
                 <ul class="nav-container-ul">
-                    <li><a href="#" class="nav-container-a">Regístrate</a></li>
-                    <li><a href="#" class="nav-container-a">Inicia sesión</a></li>
-                    <li><a href="#" class="nav-container-a">Publícate</a></li>
+                    <li class="nav-container-li"><a href="#" class="nav-container-a">Regístrate</a></li>
+                    <li class="nav-container-li"><a href="#" class="nav-container-a">Inicia sesión</a></li>
+                    <li class="nav-container-li"><a href="#" class="nav-container-a">Publícate</a></li>
                 </ul>
             </nav>
         `;

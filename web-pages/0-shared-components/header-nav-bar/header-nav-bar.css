@@ -63,7 +63,7 @@ a.nav-container-a:hover {
         margin: 0px;
     }
 
-    li {
+    li.nav-container-li {
         width: 100%; 
         text-align: center;
         margin: 2px 0; 
