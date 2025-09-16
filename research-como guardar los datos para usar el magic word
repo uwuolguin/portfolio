@@ -19,3 +19,4 @@ WHERE to_tsvector('spanish', name_es || ' ' || description_es || ' ' || category
       || to_tsvector('english', name_en || ' ' || description_en || ' ' || category_en)
       @@ plainto_tsquery('spanish', 'queso') 
       OR plainto_tsquery('english', 'cheese');
+NORMALIZE THE ABOVE

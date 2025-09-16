@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${optionsProductsHTML}
             </select>
             <div class="search-input-container">
-                <input type="text" placeholder="Ingresa comuna o ciudad">
+                <input type="text" placeholder="Introduzca un término de búsqueda.">
             </div>
             <button class="search-button">Buscar</button>
         </div>
