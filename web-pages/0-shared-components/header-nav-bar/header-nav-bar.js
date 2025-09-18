@@ -1,10 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
     const navContainer = document.getElementById('nav-container-component');
-    const isLoggedIn = false; 
+
+    // TODO: Replace localStorage-based login state with a server-side session check.
+    //       Future plan: use secure HttpOnly cookies + /api/check-session endpoint
+    //       instead of reading isLoggedIn from localStorage.
+
+    function getLoginState() {
+        let value = localStorage.getItem("isLoggedIn");
+
+        if (value === null) {
+            localStorage.setItem("isLoggedIn", "false");
+            return false;
+        }
+
+        return value === "true";
+    }
+
+    const isLoggedInBoolean = getLoginState();
 
     let navBarContent;
 
-    if (isLoggedIn) {
+    if (isLoggedInBoolean) {
         navBarContent = `
             <nav class="nav-container-flex-container">
                 <div class="nav-container-logo-container">
