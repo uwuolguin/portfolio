@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const navContainer = document.getElementById('nav-container-component');
+    // TODO: Replace localStorage-based login state with a server-side session check.
+    //       Future plan: use secure HttpOnly cookies + /api/check-session endpoint
+    //       instead of reading isLoggedIn from localStorage.
 
     function getLoginState() {
         let value = localStorage.getItem("isLoggedIn");
@@ -19,11 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return lang;
     }
 
-    function setLanguage(lang) {
-        localStorage.setItem("lang", lang);
-    }
-
-    const isLoggedInBoolean = getLoginState();
 
     function renderNav() {
         const lang = getLanguage();
@@ -33,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             en: { profile: "Profile", logout: "Log out", register: "Sign up", login: "Log in", publish: "Post Ad", flag: "🇬🇧" }
         };
 
-        let navBarContent = isLoggedInBoolean
+        let navBarContent = getLoginState()
             ? `
                 <nav class="nav-container-flex-container">
                     <div class="nav-container-logo-container">
@@ -69,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target && e.target.id === "lang-btn") {
             const currentLang = getLanguage();
             const newLang = currentLang === "es" ? "en" : "es";
-            setLanguage(newLang);
+            localStorage.setItem("lang", newLang);
             renderNav();
         }
     });
