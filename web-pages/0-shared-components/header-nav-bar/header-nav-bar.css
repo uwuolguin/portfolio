@@ -25,6 +25,7 @@ ul.nav-container-ul {
     list-style-type: none;
     margin: 20px;
     padding: 0;
+    align-items: center;
 
 }
 
@@ -42,6 +43,33 @@ a.nav-container-a:hover {
     background-color: #FF9800;
 }
 
+li.nav-container-li {
+    display: flex;
+    align-items: center; 
+}
+
+.lang-btn {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px; 
+    width: 70px;  
+}
+
+.lang-flag {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.lang-toggle {
+    margin-left: 10px;
+}
+
 @media (max-width: 600px) {
     #nav-container-component {
     max-width: 81%;
@@ -54,24 +82,41 @@ a.nav-container-a:hover {
     .nav-container-flex-container {
         flex-direction: column; 
         padding-bottom: 20px;
-
     }
 
     ul.nav-container-ul {
         flex-direction: column;
-        align-items: center; 
-        margin: 0px;
+        align-items: center;
+        margin: 0;
     }
 
     li.nav-container-li {
         width: 100%; 
         text-align: center;
-        margin: 2px 0; 
+        margin: 5px 0;
+        justify-content: center; 
     }
     a.nav-container-a {
     font-size: 12px;
     padding: 1px 1px;
 
     }
-
+    .lang-flag {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        margin-top: 10px; 
+    }
+    .lang-btn {
+        border: none;
+        background: none;
+        padding: 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 25px; 
+        width: 50px;  
+    }
 }
