@@ -1,9 +1,10 @@
+import { getLoginState, getLanguage } from '../../../0-shared-components/utils/sharedFunctions.js';
 document.addEventListener('DOMContentLoaded', () => {
     const searchContainer = document.getElementById('search-container');
     
 
-    const filterOptionsPlaces = [ "Todas las comunas","La Florida", "Lo Curro" ];
-    const filterOptionsProducts = [ "Todos Los Productos","Fiambrería", "Lácteos"];
+    const filterOptionsPlaces = [ "Todas las comunas","La Florida", "Lo Curro", "Los Troncos" ];
+    const filterOptionsProducts = [ "Todos Los Productos","Fiambrería", "Lácteos", "Legumbres"];
 
     const optionsPlacesHTML = filterOptionsPlaces.map(option => `
         <option value="${option.toLowerCase()}">${option}</option>

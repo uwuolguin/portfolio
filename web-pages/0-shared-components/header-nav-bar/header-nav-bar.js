@@ -1,3 +1,4 @@
+import { getLoginState, getLanguage } from '../utils/sharedFunctions.js';
 document.addEventListener('DOMContentLoaded', () => {
     const navContainer = document.getElementById('nav-container-component');
     
@@ -22,28 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
     };
 
-    // TODO: Replace localStorage-based login state with a server-side session check.
-    //       Future plan: use secure HttpOnly cookies + /api/check-session endpoint
-    //       instead of reading isLoggedIn from localStorage.
-    function getLoginState() {
-        let value = localStorage.getItem("isLoggedIn");
-        if (value === null) {
-            localStorage.setItem("isLoggedIn", "false");
-            return false;
-        }
-        return value === "true";
-    }
-
-    // TODO: In the future, consider storing the language preference in the server-side
-    //       session or user profile instead of localStorage for better security.
-    function getLanguage() {
-        let lang = localStorage.getItem("lang");
-        if (!lang) {
-            localStorage.setItem("lang", "es"); // default Spanish
-            return "es";
-        }
-        return lang;
-    }
 
     function renderNav() {
         const lang = getLanguage();
