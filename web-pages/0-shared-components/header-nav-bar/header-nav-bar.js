@@ -1,4 +1,4 @@
-import { getLoginState, getLanguage } from '../utils/sharedFunctions.js';
+import { getLoginState, getLanguage } from '../utils/shared-functions.js';
 document.addEventListener('DOMContentLoaded', () => {
     const navContainer = document.getElementById('nav-container-component');
     
