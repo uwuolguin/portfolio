@@ -76,6 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const newLang = currentLang === "es" ? "en" : "es";
             localStorage.setItem("lang", newLang);
             renderNav();
+            const langChangeEvent = new CustomEvent("languageChange");
+            document.dispatchEvent(langChangeEvent);
         }
     });
 
