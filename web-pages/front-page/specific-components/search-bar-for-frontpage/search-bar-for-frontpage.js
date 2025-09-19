@@ -1,7 +1,6 @@
 import { getLanguage } from '../../../0-shared-components/utils/shared-functions.js';
 document.addEventListener('DOMContentLoaded', () => {
     const searchContainer = document.getElementById('search-container');
-    const lang = getLanguage();
 
     const translations = {
         es: {
