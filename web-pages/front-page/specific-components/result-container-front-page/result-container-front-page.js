@@ -2,7 +2,7 @@ import { getLanguage } from '../../../0-shared-components/utils/shared-functions
 document.addEventListener('DOMContentLoaded', () => {
     const resultsContainer = document.getElementById('results-container');
     const cardsPerPage = 8;
-    const numbersPerPagination = 2;
+    const numbersPerPagination = 3;
     let currentPage = 1;
 
     const renderCards = (companies) => {
@@ -31,27 +31,30 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const renderPagination = (numbersPerPagination) => {
-        let startPage = currentPage;
-        let endPage = startPage + numbersPerPagination - 1;
+    let half = Math.floor(numbersPerPagination / 2);
+    let startPage = Math.max(1, currentPage - half);
+    let endPage = startPage + numbersPerPagination - 1;
 
-        let paginationHtml = `
-            <div class="pagination-container">
-                <a href="#" class="page-link prev-link">&laquo;</a>
-        `;
 
-        for (let i = startPage; i <= endPage; i++) {
-            paginationHtml += `
-                <a href="#" class="page-link ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</a>
-            `;
-        }
+    let paginationHtml = `
+        <div class="pagination-container">
+            <a href="#" class="page-link prev-link">&laquo;</a>
+    `;
 
+    for (let i = startPage; i <= endPage; i++) {
         paginationHtml += `
-                <a href="#" class="page-link next-link">&raquo;</a>
-            </div>
+            <a href="#" class="page-link ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</a>
         `;
+    }
 
-        return paginationHtml;
+    paginationHtml += `
+            <a href="#" class="page-link next-link">&raquo;</a>
+        </div>
+    `;
+
+    return paginationHtml;
     };
+
 
     const fetchAndRender = async () => {
     try {
