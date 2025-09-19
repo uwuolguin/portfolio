@@ -1,34 +1,99 @@
+import { getLanguage } from '../../../0-shared-components/utils/shared-functions.js';
 document.addEventListener('DOMContentLoaded', () => {
     const resultsContainer = document.getElementById('results-container');
-    const numCards = 8;
-    let cardsHtml = '';
+    const cardsPerPage = 8;
+    const numbersPerPagination = 2;
+    let currentPage = 1;
 
-    for (let i = 1; i <= numCards; i++) {
-        cardsHtml += `
-            <div class="business-card">
-                <div class="card-picture">
-                    <img src="https://corporate.target.com/getmedia/4a72aa51-e709-4222-8c01-92b483ec6fc1/Upcoming-Stores-Target.jpg?width=1144" alt="Product Image ${i}">
+    const renderCards = (companies) => {
+        const startIndex = (currentPage - 1) * cardsPerPage;
+        const endIndex = startIndex + cardsPerPage;
+        const companiesToDisplay = companies.slice(startIndex, endIndex);
+
+        let cardsHtml = '';
+        companiesToDisplay.forEach(company => {
+            cardsHtml += `
+                <div class="business-card">
+                    <div class="card-picture">
+                        <img src="${company.image}" alt="Product Image ${company.id}">
+                    </div>
+                    <div class="card-details">
+                        <h3 class="business-name">${company.name}</h3>
+                        <p class="concise-description">${company.description}</p>
+                        <p class="location">${company.address}</p>
+                        <p class="phone">Teléfono: ${company.phone}</p>
+                        <p class="mail">Email: ${company.email}</p>
+                    </div>
                 </div>
-                <div class="card-details">
-                    <h3 class="business-name">Nombre de Empresa ${String.fromCharCode(64 + i)}</h3>
-                    <p class="concise-description">Descripción de Producto ${i}.</p>
-                    <p class="location">Dirección ${i}, Ciudad</p>
-                    <p class="phone">Teléfono: +123 456 789${i}</p>
-                    <p class="mail">Email: info@empresa${i}.com</p>
-                </div>
+            `;
+        });
+        return cardsHtml;
+    };
+
+    const renderPagination = (numbersPerPagination) => {
+        let startPage = currentPage;
+        let endPage = startPage + numbersPerPagination - 1;
+
+        let paginationHtml = `
+            <div class="pagination-container">
+                <a href="#" class="page-link prev-link">&laquo;</a>
+        `;
+
+        for (let i = startPage; i <= endPage; i++) {
+            paginationHtml += `
+                <a href="#" class="page-link ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</a>
+            `;
+        }
+
+        paginationHtml += `
+                <a href="#" class="page-link next-link">&raquo;</a>
             </div>
         `;
+
+        return paginationHtml;
+    };
+
+    const fetchAndRender = async () => {
+    try {
+        let currentLanguage = getLanguage();
+        const response = await fetch(`./specific-components/result-container-front-page/data.json?page=${currentPage}`); 
+        const data = await response.json();
+        const companies = data[currentLanguage]?.companies || [];
+
+        let cardsHtml = '';
+        if (companies.length > 0) {
+            cardsHtml = renderCards(companies);
+        }
+
+        const paginationHtml = renderPagination(numbersPerPagination);
+
+        resultsContainer.innerHTML = `
+            <div class="results-grid">${cardsHtml}</div>
+            ${paginationHtml}
+        `;
+
+        const pageLinks = document.querySelectorAll('.page-link');
+        pageLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (e.target.classList.contains('prev-link')) {
+                    currentPage = Math.max(1, currentPage - 1);
+                } else if (e.target.classList.contains('next-link')) {
+                    currentPage = currentPage + 1;
+                } else {
+                    currentPage = parseInt(e.target.getAttribute('data-page'));
+                }
+                fetchAndRender();
+            });
+        });
+
+    } catch (error) {
+        console.error("Error fetching data:", error);
     }
+    };
+    document.addEventListener("languageChange", () => {
+        fetchAndRender();
+    });
 
-    const paginationHtml = `
-        <div class="pagination-container">
-            <a href="#" class="page-link">&laquo;</a>
-            <a href="#" class="page-link active">1</a>
-            <a href="#" class="page-link">2</a>
-            <a href="#" class="page-link">3</a>
-            <a href="#" class="page-link">&raquo;</a>
-        </div>
-    `;
-
-    resultsContainer.innerHTML = `<div class="results-grid">${cardsHtml}</div>${paginationHtml}`;
+    fetchAndRender();
 });
