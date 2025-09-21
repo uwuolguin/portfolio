@@ -1,0 +1,93 @@
+/* General styling for the login section */
+#login-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+}
+
+.login-container {
+    background-color: #252E41;
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-title {
+    color: #ffffff;
+    font-family: sans-serif;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-group {
+    width: 100%;
+}
+
+.login-input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3b455b;
+    color: #ffffff;
+    font-size: 1rem;
+    font-family: sans-serif;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.login-input::placeholder {
+    color: #a0a0a0;
+}
+
+.login-input:focus {
+    outline: none;
+    background-color: #4a546d;
+    box-shadow: 0 0 0 2px #FF9800;
+}
+
+.login-button {
+    background-color: #FF9800;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: #e68a00;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .login-container {
+        padding: 1.5rem;
+        max-width: 90%;
+    }
+
+    .login-title {
+        font-size: 1.5rem;
+    }
+
+    .login-input {
+        font-size: 0.9rem;
+    }
+
+    .login-button {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}

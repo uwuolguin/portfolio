@@ -72,7 +72,7 @@ li.nav-container-li {
 
 @media (max-width: 600px) {
     #nav-container-component {
-    max-width: 81%;
+    max-width: 100%;
     margin: 0 auto;
     }
     .nav-container-logo-container img {

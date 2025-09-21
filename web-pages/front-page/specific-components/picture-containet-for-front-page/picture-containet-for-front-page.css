@@ -15,5 +15,6 @@
   .image-container img {
     max-height: 100px;
     object-fit: cover;
+    width: 100%;
   }
 }
