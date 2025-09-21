@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
             address: "Dirección",
             phone: "Teléfono de la empresa",
             companyAddress: "Dirección de la empresa",
-            publishButton: "Publicar"
+            publishButton: "Publicar",
+            selectImage: "📁 Seleccionar imagen de la empresa"
         },
         en: {
             title: "Publish your company",
@@ -20,7 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
             address: "Address",
             phone: "Company phone",
             companyAddress: "Company address",
-            publishButton: "Publish"
+            publishButton: "Publish",
+            selectImage: "📁 Select company image"
         }
     };
 
@@ -47,12 +49,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="input-group">
                         <input type="text" id="companyAddress" class="publish-input" placeholder="${t.companyAddress}" required>
                     </div>
+                    <div class="input-group">
+                        <div class="file-input-wrapper">
+                            <input type="file" id="companyImage" class="file-input-hidden" accept="image/*">
+                            <label for="companyImage" class="file-input-label" id="fileLabel">
+                                ${t.selectImage}
+                            </label>
+                        </div>
+                    </div>
                     <button type="submit" class="publish-button">${t.publishButton}</button>
                 </form>
             </div>
         `;
 
-        // attach event listener
         const form = document.getElementById("publish-form");
         form.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -62,9 +71,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 address: document.getElementById("address").value,
                 phone: document.getElementById("phone").value,
                 companyAddress: document.getElementById("companyAddress").value,
+                companyImage: document.getElementById("companyImage").files[0] || null,
             };
             console.log("Publishing data:", data);
             alert("Mock publish action. Data logged in console.");
+        });
+
+        const fileInput = document.getElementById("companyImage");
+        const fileLabel = document.getElementById("fileLabel");
+
+        fileInput.addEventListener("change", (e) => {
+            const fileName = e.target.files[0]?.name;
+            const lang = getLanguage();
+            const t = translations[lang];
+            
+            if (fileName) {
+                fileLabel.textContent = `✅ ${fileName}`;
+                fileLabel.classList.add("has-file");
+            } else {
+                fileLabel.textContent = t.selectImage;
+                fileLabel.classList.remove("has-file");
+            }
         });
     }
 
