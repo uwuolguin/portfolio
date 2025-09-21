@@ -1,10 +1,10 @@
 .results-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    padding: 20px;
+    grid-template-columns: repeat(1, 1fr); /* exactly 2 per row */
+    gap: 40px; /* more space between cards */
+    padding: 30px;
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 1000px;
 }
 
 .business-card {
@@ -22,18 +22,25 @@
 
 .card-picture img {
     width: 100%;
-    height: 200px;
+    height: 220px;
     object-fit: cover;
     display: block;
 }
 
 .card-details {
-    padding: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* stack elements vertically */
+    gap: 8px; /* spacing between fields */
+    overflow-wrap: break-word; /* for good measure */
+    white-space: normal; /* allow wrapping */
+    word-break: break-word; /* break very long words like emails */
 }
 
+
 .business-name {
-    margin: 0 0 5px;
-    font-size: 1.2em;
+    margin: 0 0 10px;
+    font-size: 1.3em;
     color: #333;
 }
 
@@ -41,8 +48,8 @@
 .location,
 .phone,
 .mail {
-    margin: 0 0 5px;
-    font-size: 0.9em;
+    margin: 0 0 8px;
+    font-size: 1em;
     color: #666;
 }
 
@@ -50,16 +57,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 30px;
-    margin-bottom: 50px;
+    margin-top: 40px;
+    margin-bottom: 60px;
 }
 
 .page-link {
     color: #333;
-    padding: 8px 16px;
+    padding: 10px 18px;
     text-decoration: none;
     border: 1px solid #ddd;
-    margin: 0 4px;
+    margin: 0 6px;
     border-radius: 4px;
 }
 

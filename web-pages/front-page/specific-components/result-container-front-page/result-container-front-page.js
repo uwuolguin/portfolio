@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <h3 class="business-name">${company.name}</h3>
                         <p class="concise-description">${company.description}</p>
                         <p class="location">${company.address}</p>
-                        <p class="phone">Teléfono: ${company.phone}</p>
-                        <p class="mail">Email: ${company.email}</p>
+                        <p class="phone"> ${company.phone}</p>
+                        <p class="mail"> ${company.email}</p>
                     </div>
                 </div>
             `;

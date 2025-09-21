@@ -1,0 +1,99 @@
+#publish-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+.publish-container {
+    background-color: #252E41;
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.publish-title {
+    color: #ffffff;
+    font-family: sans-serif;
+    margin-bottom: 1rem;
+    margin-top: 0rem;
+    font-size: 2rem;
+}
+
+.publish-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.input-group {
+    width: 100%;
+}
+
+.publish-input, .publish-textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3b455b;
+    color: #ffffff;
+    font-size: 1rem;
+    font-family: sans-serif;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.publish-input::placeholder,
+.publish-textarea::placeholder {
+    color: #a0a0a0;
+}
+
+.publish-input:focus, .publish-textarea:focus {
+    outline: none;
+    background-color: #4a546d;
+    box-shadow: 0 0 0 2px #FF9800;
+}
+
+.publish-textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.publish-button {
+    background-color: #FF9800;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.publish-button:hover {
+    background-color: #e68a00;
+}
+
+@media (max-width: 600px) {
+    .publish-container {
+        padding: 1.5rem;
+        max-width: 90%;
+    }
+
+    .publish-title {
+        font-size: 1.2rem;
+    }
+
+    .publish-input,
+    .publish-textarea {
+        font-size: 0.8rem;
+    }
+
+    .publish-button {
+        font-size: 0.8rem;
+        padding: 10px;
+    }
+}
