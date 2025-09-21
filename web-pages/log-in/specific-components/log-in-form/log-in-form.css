@@ -19,7 +19,8 @@
 .login-title {
     color: #ffffff;
     font-family: sans-serif;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 0rem;
     font-size: 2rem;
 }
 
@@ -79,15 +80,15 @@
     }
 
     .login-title {
-        font-size: 1.5rem;
+        font-size: 1rem;
     }
 
     .login-input {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
     }
 
     .login-button {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         padding: 10px;
     }
 }
