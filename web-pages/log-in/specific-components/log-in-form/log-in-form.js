@@ -6,13 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const translations = {
         es: {
             title: "Inicia sesión",
-            usernamePlaceholder: "Nombre de usuario",
+            usernamePlaceholder: "Correo",
             passwordPlaceholder: "Contraseña",
             loginButton: "Iniciar sesión"
         },
         en: {
             title: "Log in",
-            usernamePlaceholder: "Username",
+            usernamePlaceholder: "Email",
             passwordPlaceholder: "Password",
             loginButton: "Log in"
         }
