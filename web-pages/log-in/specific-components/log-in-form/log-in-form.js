@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loginSection.innerHTML = loginFormContent;
     }
 
-    renderLoginForm();
+    
     
     // Attach event listener to the form for a mock login action
     const loginForm = document.getElementById('login-form');
@@ -53,5 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("This is a mock login action. In a real application, this would authenticate the user.");
         });
     }
+    document.addEventListener("languageChange", () => {
+        renderLoginForm();
+    });
 
+    renderLoginForm();
 });
