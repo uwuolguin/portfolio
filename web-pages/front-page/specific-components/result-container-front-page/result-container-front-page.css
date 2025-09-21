@@ -1,7 +1,7 @@
 .results-grid {
     display: grid;
-    grid-template-columns: repeat(1, 1fr); /* exactly 2 per row */
-    gap: 40px; /* more space between cards */
+    grid-template-columns: repeat(1, 1fr); 
+    gap: 40px; 
     padding: 30px;
     margin: 0 auto;
     max-width: 1000px;
@@ -30,11 +30,11 @@
 .card-details {
     padding: 20px;
     display: flex;
-    flex-direction: column; /* stack elements vertically */
-    gap: 8px; /* spacing between fields */
-    overflow-wrap: break-word; /* for good measure */
-    white-space: normal; /* allow wrapping */
-    word-break: break-word; /* break very long words like emails */
+    flex-direction: column; 
+    gap: 8px; 
+    overflow-wrap: break-word; 
+    white-space: normal; 
+    word-break: break-word; 
 }
 
 
