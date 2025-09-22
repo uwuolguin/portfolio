@@ -22,7 +22,9 @@
     margin-top: 0rem;
     font-size: 2rem;
 }
-
+.already-logged-message{
+    color: #ffffff;
+}
 .login-form {
     display: flex;
     flex-direction: column;
