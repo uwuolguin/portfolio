@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const hasPublishedCompany = getCompanyPublishState();
 
         // Case 1: User not logged in
-        if (!isLoggedIn) {
+        if (isLoggedIn) {
             profileSection.innerHTML = `
                 <div class="profile-container">
                     <h2 class="profile-title">${t.title}</h2>
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Case 2: User logged in but hasn't published a company
-        if (hasPublishedCompany) {
+        if (!hasPublishedCompany) {
             profileSection.innerHTML = `
                 <div class="profile-container">
                     <h2 class="profile-title">${t.title}</h2>

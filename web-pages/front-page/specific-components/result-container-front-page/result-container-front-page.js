@@ -2,7 +2,7 @@ import { getLanguage } from '../../../0-shared-components/utils/shared-functions
 
 document.addEventListener('DOMContentLoaded', () => {
     const resultsContainer = document.getElementById('results-container');
-    const cardsPerPage = 8;
+    const cardsPerPage = 5;
     const numbersPerPagination = 3;
     let currentPage = 1;
 
