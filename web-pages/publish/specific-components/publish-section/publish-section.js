@@ -19,8 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             loginHere: "Inicia sesión aquí",
             alreadyPublished: "Ya has publicado una empresa.",
             viewProfile: "Ver mi perfil",
-            republish: "Publicar otra empresa",
-            alreadyPublishedMessage: "Tu empresa ya está publicada. ¿Qué te gustaría hacer?"
+            alreadyPublishedMessage: "Tu empresa ya está publicada."
         },
         en: {
             title: "Publish your company",
@@ -37,8 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             loginHere: "Log in here",
             alreadyPublished: "You have already published a company.",
             viewProfile: "View my profile",
-            republish: "Publish another company",
-            alreadyPublishedMessage: "Your company is already published. What would you like to do?"
+            alreadyPublishedMessage: "Your company is already published."
         }
     };
 
@@ -68,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="already-published-message">${t.alreadyPublishedMessage}</div>
                 <div class="publish-actions">
                     <button id="viewProfileBtn" class="publish-button">${t.viewProfile}</button>
-                    <button id="republishBtn" class="publish-button secondary">${t.republish}</button>
                 </div>
             </div>
         `;
@@ -78,9 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = '../profile-view/profile-view.html';
         });
 
-        document.getElementById('republishBtn').addEventListener('click', () => {
-            renderPublishForm();
-        });
     }
 
     function renderPublishForm() {
