@@ -1,4 +1,4 @@
-import { getLanguage, setCompanyPublishState } from '../../../0-shared-components/utils/shared-functions.js';
+import { getLanguage, getLoginState, getCompanyPublishState, setCompanyPublishState } from '../../../0-shared-components/utils/shared-functions.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const publishSection = document.getElementById('publish-section');
@@ -12,9 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
             phone: "Teléfono de la empresa",
             companyAddress: "Dirección de la empresa",
             publishButton: "Publicar",
-            selectImage: "📁 Seleccionar imagen de la empresa",
+            selectImage: "📷 Seleccionar imagen de la empresa",
             publishSuccess: "¡Empresa publicada exitosamente!",
-            publishError: "Error al publicar la empresa. Inténtalo de nuevo."
+            publishError: "Error al publicar la empresa. Inténtalo de nuevo.",
+            loginRequired: "Debes iniciar sesión para publicar tu empresa.",
+            loginHere: "Inicia sesión aquí",
+            alreadyPublished: "Ya has publicado una empresa.",
+            viewProfile: "Ver mi perfil",
+            republish: "Publicar otra empresa",
+            alreadyPublishedMessage: "Tu empresa ya está publicada. ¿Qué te gustaría hacer?"
         },
         en: {
             title: "Publish your company",
@@ -24,11 +30,60 @@ document.addEventListener('DOMContentLoaded', () => {
             phone: "Company phone",
             companyAddress: "Company address",
             publishButton: "Publish",
-            selectImage: "📁 Select company image",
+            selectImage: "📷 Select company image",
             publishSuccess: "Company published successfully!",
-            publishError: "Error publishing company. Please try again."
+            publishError: "Error publishing company. Please try again.",
+            loginRequired: "You must log in to publish your company.",
+            loginHere: "Log in here",
+            alreadyPublished: "You have already published a company.",
+            viewProfile: "View my profile",
+            republish: "Publish another company",
+            alreadyPublishedMessage: "Your company is already published. What would you like to do?"
         }
     };
+
+    function renderLoginRequired() {
+        const lang = getLanguage();
+        const t = translations[lang];
+
+        publishSection.innerHTML = `
+            <div class="publish-container">
+                <h2 class="publish-title">${t.title}</h2>
+                <div class="login-message" style="color: #ffffff; font-family: sans-serif; font-size: 1.1rem; line-height: 1.5;">
+                    ${t.loginRequired}
+                    <br><br>
+                    <a href="../login/login.html" style="color: #FF9800; text-decoration: none; font-weight: bold;">${t.loginHere}</a>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderAlreadyPublished() {
+        const lang = getLanguage();
+        const t = translations[lang];
+
+        publishSection.innerHTML = `
+            <div class="publish-container">
+                <h2 class="publish-title">${t.alreadyPublished}</h2>
+                <div class="login-message" style="color: #ffffff; font-family: sans-serif; font-size: 1.1rem; line-height: 1.5; margin-bottom: 2rem;">
+                    ${t.alreadyPublishedMessage}
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button id="viewProfileBtn" class="publish-button" style="flex: 1; max-width: 200px;">${t.viewProfile}</button>
+                    <button id="republishBtn" class="publish-button" style="flex: 1; max-width: 200px; background-color: #4a546d;">${t.republish}</button>
+                </div>
+            </div>
+        `;
+
+        // Add event listeners
+        document.getElementById('viewProfileBtn').addEventListener('click', () => {
+            window.location.href = '../profile-view/profile-view.html';
+        });
+
+        document.getElementById('republishBtn').addEventListener('click', () => {
+            renderPublishForm();
+        });
+    }
 
     function renderPublishForm() {
         const lang = getLanguage();
@@ -90,22 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     formData.append('companyImage', imageFile);
                 }
 
-                // TODO: Replace this mock with actual API call
-                // const publishResponse = await fetch('/api/publish-company', {
-                //     method: 'POST',
-                //     body: formData,
-                //     headers: {
-                //         // Don't set Content-Type header - let browser set it for FormData
-                //         'Authorization': `Bearer ${localStorage.getItem('authToken')}` // TODO: Add when auth is implemented
-                //     }
-                // });
-
-                // TODO: Handle real API response
-                // if (!publishResponse.ok) {
-                //     throw new Error(`HTTP error! status: ${publishResponse.status}`);
-                // }
-                // const result = await publishResponse.json();
-
                 // Mock API delay for realistic UX
                 await new Promise(resolve => setTimeout(resolve, 1500));
                 
@@ -113,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const mockSuccess = Math.random() > 0.1; // 90% success rate for testing
                 
                 if (mockSuccess) {
-                    // TODO: Remove this mock success logic when real API is implemented
                     console.log("Publishing data:", {
                         companyName: document.getElementById("companyName").value,
                         productDescription: document.getElementById("productDescription").value,
@@ -129,16 +167,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Show success message
                     alert(t.publishSuccess);
                     
-                    // Optional: Redirect to profile page after successful publish
-                    // window.location.href = '../profile/profile.html';
-                    
-                    // Reset form
-                    form.reset();
-                    
-                    // Reset file input label
-                    const fileLabel = document.getElementById("fileLabel");
-                    fileLabel.textContent = t.selectImage;
-                    fileLabel.classList.remove("has-file");
+                    // Render already published view
+                    renderAlreadyPublished();
                     
                 } else {
                     // Mock error for testing
@@ -173,6 +203,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    document.addEventListener("languageChange", renderPublishForm);
-    renderPublishForm();
+    function renderContent() {
+        const isLoggedIn = getLoginState();
+        const hasPublishedCompany = getCompanyPublishState();
+
+        if (!isLoggedIn) {
+            renderLoginRequired();
+        } else if (hasPublishedCompany) {
+            renderAlreadyPublished();
+        } else {
+            renderPublishForm();
+        }
+    }
+
+    document.addEventListener("languageChange", renderContent);
+    document.addEventListener("userHasLogged", renderContent);
+    document.addEventListener("companyPublishStateChange", renderContent);
+    renderContent();
 });
