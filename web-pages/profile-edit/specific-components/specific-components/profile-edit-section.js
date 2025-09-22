@@ -1,4 +1,4 @@
-import { getLanguage, getLoginState, getCompanyPublishState, getCompanyData, setCompanyData } from '../../../../0-shared-components/utils/shared-functions.js';
+import { getLanguage, getLoginState, getCompanyPublishState, getCompanyData, setCompanyData } from '';
 document.addEventListener('DOMContentLoaded', () => {
     const profileEditSection = document.getElementById('profile-edit-section');
 
