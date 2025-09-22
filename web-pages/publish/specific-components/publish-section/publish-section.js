@@ -1,4 +1,4 @@
-import { getLanguage } from '../../../0-shared-components/utils/shared-functions.js';
+import { getLanguage, setCompanyPublishState } from '../../../0-shared-components/utils/shared-functions.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const publishSection = document.getElementById('publish-section');
@@ -12,7 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
             phone: "Teléfono de la empresa",
             companyAddress: "Dirección de la empresa",
             publishButton: "Publicar",
-            selectImage: "📁 Seleccionar imagen de la empresa"
+            selectImage: "📁 Seleccionar imagen de la empresa",
+            publishSuccess: "¡Empresa publicada exitosamente!",
+            publishError: "Error al publicar la empresa. Inténtalo de nuevo."
         },
         en: {
             title: "Publish your company",
@@ -22,7 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
             phone: "Company phone",
             companyAddress: "Company address",
             publishButton: "Publish",
-            selectImage: "📁 Select company image"
+            selectImage: "📁 Select company image",
+            publishSuccess: "Company published successfully!",
+            publishError: "Error publishing company. Please try again."
         }
     };
 
@@ -63,18 +67,92 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         const form = document.getElementById("publish-form");
-        form.addEventListener("submit", (e) => {
+        form.addEventListener("submit", async (e) => {
             e.preventDefault();
-            const data = {
-                companyName: document.getElementById("companyName").value,
-                productDescription: document.getElementById("productDescription").value,
-                address: document.getElementById("address").value,
-                phone: document.getElementById("phone").value,
-                companyAddress: document.getElementById("companyAddress").value,
-                companyImage: document.getElementById("companyImage").files[0] || null,
-            };
-            console.log("Publishing data:", data);
-            alert("Mock publish action. Data logged in console.");
+            
+            const submitButton = document.getElementById("publish-form").querySelector('.publish-button');
+            const originalButtonText = submitButton.textContent;
+            
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = lang === 'es' ? 'Publicando...' : 'Publishing...';
+            
+            try {
+                const formData = new FormData();
+                formData.append('companyName', document.getElementById("companyName").value);
+                formData.append('productDescription', document.getElementById("productDescription").value);
+                formData.append('address', document.getElementById("address").value);
+                formData.append('phone', document.getElementById("phone").value);
+                formData.append('companyAddress', document.getElementById("companyAddress").value);
+                
+                const imageFile = document.getElementById("companyImage").files[0];
+                if (imageFile) {
+                    formData.append('companyImage', imageFile);
+                }
+
+                // TODO: Replace this mock with actual API call
+                // const publishResponse = await fetch('/api/publish-company', {
+                //     method: 'POST',
+                //     body: formData,
+                //     headers: {
+                //         // Don't set Content-Type header - let browser set it for FormData
+                //         'Authorization': `Bearer ${localStorage.getItem('authToken')}` // TODO: Add when auth is implemented
+                //     }
+                // });
+
+                // TODO: Handle real API response
+                // if (!publishResponse.ok) {
+                //     throw new Error(`HTTP error! status: ${publishResponse.status}`);
+                // }
+                // const result = await publishResponse.json();
+
+                // Mock API delay for realistic UX
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Mock success response
+                const mockSuccess = Math.random() > 0.1; // 90% success rate for testing
+                
+                if (mockSuccess) {
+                    // TODO: Remove this mock success logic when real API is implemented
+                    console.log("Publishing data:", {
+                        companyName: document.getElementById("companyName").value,
+                        productDescription: document.getElementById("productDescription").value,
+                        address: document.getElementById("address").value,
+                        phone: document.getElementById("phone").value,
+                        companyAddress: document.getElementById("companyAddress").value,
+                        companyImage: imageFile || null,
+                    });
+                    
+                    // Set company publish state to true
+                    setCompanyPublishState(true);
+                    
+                    // Show success message
+                    alert(t.publishSuccess);
+                    
+                    // Optional: Redirect to profile page after successful publish
+                    // window.location.href = '../profile/profile.html';
+                    
+                    // Reset form
+                    form.reset();
+                    
+                    // Reset file input label
+                    const fileLabel = document.getElementById("fileLabel");
+                    fileLabel.textContent = t.selectImage;
+                    fileLabel.classList.remove("has-file");
+                    
+                } else {
+                    // Mock error for testing
+                    throw new Error("Mock publish error");
+                }
+                
+            } catch (error) {
+                console.error('Error publishing company:', error);
+                alert(t.publishError);
+            } finally {
+                // Re-enable button and restore original text
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+            }
         });
 
         const fileInput = document.getElementById("companyImage");

@@ -20,3 +20,20 @@
         }
         return lang;
     }
+    
+    // TODO: Replace localStorage-based company publish state with server-side data
+//       Future plan: Get this info from the login endpoint response or dedicated API
+    export function getCompanyPublishState() {
+        let value = localStorage.getItem("hasPublishedCompany");
+        if (value === null) {
+            localStorage.setItem("hasPublishedCompany", "false");
+            return false;
+        }
+        return value === "true";
+    }
+
+    export function setCompanyPublishState(hasPublished) {
+        localStorage.setItem("hasPublishedCompany", hasPublished.toString());
+        // Dispatch event for components listening to changes
+        document.dispatchEvent(new CustomEvent("companyPublishStateChange"));
+    }
