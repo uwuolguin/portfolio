@@ -55,16 +55,13 @@ document.addEventListener('DOMContentLoaded', () => {
         address: "Av. Providencia 1234, Santiago",
         phone: "+56 9 8765 4321",
         companyAddress: "Av. Providencia 1234, Oficina 501, Providencia, Santiago",
-        companyImage: "../../../logos-pictures/pictures/background-picture.jpg" // Mock image URL - TODO: Replace with real uploaded image URL from API
+        companyImage: "../../../logos-pictures/pictures/background-picture.jpg"
     };
 
     function handleUpdateProfile() {
         const lang = getLanguage();
-        // TODO: Implement update profile functionality
-        // TODO: Redirect to update profile page or open modal
         console.log("Update profile clicked");
         alert(lang === 'es' ? 'Funcionalidad de actualizar perfil - TODO' : 'Update profile functionality - TODO');
-        // window.location.href = '../profile-edit/profile-edit.html';
     }
 
     function handleDeleteProfile() {
@@ -73,33 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (confirm(t.confirmDelete)) {
             try {
-                // TODO: Replace with actual API call
-                // const deleteResponse = await fetch('/api/delete-profile', {
-                //     method: 'DELETE',
-                //     headers: {
-                //         'Authorization': `Bearer ${localStorage.getItem('authToken')}`
-                //     }
-                // });
-                
-                // Mock deletion process
                 console.log("Deleting profile...");
-                
-                // TODO: Handle real API response
-                // if (deleteResponse.ok) {
-                //     localStorage.removeItem("isLoggedIn");
-                //     localStorage.removeItem("hasPublishedCompany");
-                //     alert(t.profileDeleted);
-                //     window.location.href = '../login/login.html';
-                // } else {
-                //     throw new Error('Delete failed');
-                // }
-                
-                // Mock success for now
                 alert(t.profileDeleted);
                 localStorage.setItem("isLoggedIn", "false");
                 localStorage.setItem("hasPublishedCompany", "false");
                 location.reload();
-                
             } catch (error) {
                 console.error('Error deleting profile:', error);
                 alert(t.deleteError);
@@ -113,8 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const isLoggedIn = getLoginState();
         const hasPublishedCompany = getCompanyPublishState();
 
-        // Case 1: User not logged in
-        if (isLoggedIn) {
+        // Case 1: User NOT logged in
+        if (!isLoggedIn) {
             profileSection.innerHTML = `
                 <div class="profile-container">
                     <h2 class="profile-title">${t.title}</h2>
@@ -218,6 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.addEventListener("languageChange", renderProfileContent);
+    document.addEventListener("userHasLogged", renderProfileContent);
     document.addEventListener("companyPublishStateChange", renderProfileContent);
     renderProfileContent();
 });
