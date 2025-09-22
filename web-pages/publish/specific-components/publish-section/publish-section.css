@@ -2,7 +2,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .publish-container {
@@ -15,7 +14,6 @@
     text-align: center;
     margin-top: 80px;
     margin-bottom: 80px;
-
 }
 
 .publish-title {
@@ -121,6 +119,53 @@
     color: #FF9800;
 }
 
+/* New classes for different states */
+.login-message {
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.login-message a {
+    color: #FF9800;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-message a:hover {
+    color: #e68a00;
+    text-decoration: underline;
+}
+
+.already-published-message {
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+}
+
+.publish-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.publish-actions .publish-button {
+    flex: 1;
+    max-width: 200px;
+}
+
+.publish-button.secondary {
+    background-color: #4a546d;
+}
+
+.publish-button.secondary:hover {
+    background-color: #5a647d;
+}
+
 @media (max-width: 600px) {
     .publish-container {
         padding: 1.5rem;
@@ -140,5 +185,14 @@
     .publish-button {
         font-size: 0.8rem;
         padding: 10px;
+    }
+
+    .publish-actions {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .publish-actions .publish-button {
+        max-width: none;
     }
 }

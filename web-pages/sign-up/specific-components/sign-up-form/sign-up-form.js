@@ -39,12 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const alreadyLoggedContent = `
             <div class="signup-container">
                 <h2 class="signup-title">${t.alreadyLoggedTitle}</h2>
-                <p style="color: #ffffff; font-family: sans-serif; font-size: 1.1rem; line-height: 1.5; margin-bottom: 2rem;">
-                    ${t.alreadyLoggedMessage}
-                </p>
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <button id="go-to-main" class="signup-button" style="flex: 1; max-width: 150px;">${t.goToMainPage}</button>
-                    <button id="logout-button" class="signup-button" style="flex: 1; max-width: 150px; background-color: #4a546d;">${t.logout}</button>
+                <p class="already-logged-message">${t.alreadyLoggedMessage}</p>
+                <div class="signup-actions">
+                    <button id="go-to-main" class="signup-button">${t.goToMainPage}</button>
+                    <button id="logout-button" class="signup-button secondary">${t.logout}</button>
                 </div>
             </div>
         `;
@@ -105,15 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     const password = document.getElementById('password').value;
                     
                     // TODO: Replace this mock with actual API call
-                    // const signupResponse = await fetch('/api/signup', {
-                    //     method: 'POST',
-                    //     headers: {
-                    //         'Content-Type': 'application/json',
-                    //     },
-                    //     body: JSON.stringify({ name, email, password }),
-                    // });
-
-                    // Mock API delay for realistic UX
                     await new Promise(resolve => setTimeout(resolve, 1500));
                     
                     // Mock success response (90% success rate for testing)

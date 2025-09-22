@@ -71,6 +71,35 @@
     background-color: #e68a00;
 }
 
+/* New classes for already logged in view */
+.already-logged-message {
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+}
+
+.signup-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.signup-actions .signup-button {
+    flex: 1;
+    max-width: 150px;
+}
+
+.signup-button.secondary {
+    background-color: #4a546d;
+}
+
+.signup-button.secondary:hover {
+    background-color: #5a647d;
+}
+
 @media (max-width: 600px) {
     .signup-container {
         padding: 1.5rem;
@@ -88,5 +117,14 @@
     .signup-button {
         font-size: 0.8rem;
         padding: 10px;
+    }
+
+    .signup-actions {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .signup-actions .signup-button {
+        max-width: none;
     }
 }

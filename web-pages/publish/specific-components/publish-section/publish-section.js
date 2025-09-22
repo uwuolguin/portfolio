@@ -49,10 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
         publishSection.innerHTML = `
             <div class="publish-container">
                 <h2 class="publish-title">${t.title}</h2>
-                <div class="login-message" style="color: #ffffff; font-family: sans-serif; font-size: 1.1rem; line-height: 1.5;">
+                <div class="login-message">
                     ${t.loginRequired}
                     <br><br>
-                    <a href="../login/login.html" style="color: #FF9800; text-decoration: none; font-weight: bold;">${t.loginHere}</a>
+                    <a href="../login/login.html">${t.loginHere}</a>
                 </div>
             </div>
         `;
@@ -65,12 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
         publishSection.innerHTML = `
             <div class="publish-container">
                 <h2 class="publish-title">${t.alreadyPublished}</h2>
-                <div class="login-message" style="color: #ffffff; font-family: sans-serif; font-size: 1.1rem; line-height: 1.5; margin-bottom: 2rem;">
-                    ${t.alreadyPublishedMessage}
-                </div>
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <button id="viewProfileBtn" class="publish-button" style="flex: 1; max-width: 200px;">${t.viewProfile}</button>
-                    <button id="republishBtn" class="publish-button" style="flex: 1; max-width: 200px; background-color: #4a546d;">${t.republish}</button>
+                <div class="already-published-message">${t.alreadyPublishedMessage}</div>
+                <div class="publish-actions">
+                    <button id="viewProfileBtn" class="publish-button">${t.viewProfile}</button>
+                    <button id="republishBtn" class="publish-button secondary">${t.republish}</button>
                 </div>
             </div>
         `;
