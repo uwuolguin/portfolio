@@ -1,4 +1,4 @@
-import { getLanguage } from '../../../0-shared-components/utils/shared-functions.js';
+import { getLanguage, getLoginState, setLoginState } from '../../../0-shared-components/utils/shared-functions.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const signupSection = document.getElementById('signup-section');
@@ -9,16 +9,58 @@ document.addEventListener('DOMContentLoaded', () => {
             namePlaceholder: "Nombre",
             emailPlaceholder: "Correo",
             passwordPlaceholder: "Contraseña",
-            signupButton: "Registrarse"
+            signupButton: "Registrarse",
+            alreadyLoggedTitle: "Ya tienes una cuenta activa",
+            alreadyLoggedMessage: "Ya has iniciado sesión. ¿Qué te gustaría hacer?",
+            goToMainPage: "Ir a la página principal",
+            logout: "Cerrar sesión",
+            signupSuccess: "¡Cuenta creada exitosamente! Bienvenido.",
+            signupError: "Error al crear la cuenta. Inténtalo de nuevo."
         },
         en: {
             title: "Sign up",
             namePlaceholder: "Name",
             emailPlaceholder: "Email",
             passwordPlaceholder: "Password",
-            signupButton: "Sign up"
+            signupButton: "Sign up",
+            alreadyLoggedTitle: "You already have an active account",
+            alreadyLoggedMessage: "You're already logged in. What would you like to do?",
+            goToMainPage: "Go to main page",
+            logout: "Log out",
+            signupSuccess: "Account created successfully! Welcome.",
+            signupError: "Error creating account. Please try again."
         }
     };
+
+    function renderAlreadyLoggedView() {
+        const lang = getLanguage();
+        const t = translations[lang];
+
+        const alreadyLoggedContent = `
+            <div class="signup-container">
+                <h2 class="signup-title">${t.alreadyLoggedTitle}</h2>
+                <p style="color: #ffffff; font-family: sans-serif; font-size: 1.1rem; line-height: 1.5; margin-bottom: 2rem;">
+                    ${t.alreadyLoggedMessage}
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button id="go-to-main" class="signup-button" style="flex: 1; max-width: 150px;">${t.goToMainPage}</button>
+                    <button id="logout-button" class="signup-button" style="flex: 1; max-width: 150px; background-color: #4a546d;">${t.logout}</button>
+                </div>
+            </div>
+        `;
+
+        signupSection.innerHTML = alreadyLoggedContent;
+
+        // Add event listeners
+        document.getElementById('go-to-main').addEventListener('click', () => {
+            window.location.href = '../front-page/front-page.html';
+        });
+
+        document.getElementById('logout-button').addEventListener('click', () => {
+            setLoginState(false);
+            // Page will reload automatically due to storage listener
+        });
+    }
 
     function renderSignupForm() {
         const lang = getLanguage();
@@ -43,24 +85,81 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         signupSection.innerHTML = signupFormContent;
+
+        // Attach event listener to the form
+        const signupForm = document.getElementById('signup-form');
+        if (signupForm) {
+            signupForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const submitButton = signupForm.querySelector('.signup-button');
+                const originalButtonText = submitButton.textContent;
+                
+                // Disable button and show loading state
+                submitButton.disabled = true;
+                submitButton.textContent = lang === 'es' ? 'Registrando...' : 'Signing up...';
+                
+                try {
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    
+                    // TODO: Replace this mock with actual API call
+                    // const signupResponse = await fetch('/api/signup', {
+                    //     method: 'POST',
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //     },
+                    //     body: JSON.stringify({ name, email, password }),
+                    // });
+
+                    // Mock API delay for realistic UX
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    
+                    // Mock success response (90% success rate for testing)
+                    const mockSuccess = Math.random() > 0.1;
+                    
+                    if (mockSuccess) {
+                        console.log("Attempting to sign up with name:", name, "and email:", email);
+                        
+                        // Set login state to true (auto-login after signup)
+                        setLoginState(true);
+                        
+                        // Show success message
+                        alert(t.signupSuccess);
+                        
+                        // Redirect to main page
+                        window.location.href = '../front-page/front-page.html';
+                        
+                    } else {
+                        // Mock error for testing
+                        throw new Error("Mock signup error");
+                    }
+                    
+                } catch (error) {
+                    console.error('Signup error:', error);
+                    alert(t.signupError);
+                } finally {
+                    // Re-enable button and restore original text
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalButtonText;
+                }
+            });
+        }
     }
 
-    // Attach event listener to the form for a mock signup action
-    const signupForm = document.getElementById('signup-form');
-    if (signupForm) {
-        signupForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            // In a real application, you would send this to a server for registration
-            console.log("Attempting to sign up with name:", name, "and email:", email);
-            alert("This is a mock sign up action. In a real application, this would register the user.");
-        });
+    function renderContent() {
+        const isLoggedIn = getLoginState();
+        
+        if (isLoggedIn) {
+            renderAlreadyLoggedView();
+        } else {
+            renderSignupForm();
+        }
     }
 
-    document.addEventListener("languageChange", () => {
-        renderSignupForm();
-    });
+    document.addEventListener("languageChange", renderContent);
+    document.addEventListener("userHasLogged", renderContent);
 
-    renderSignupForm();
+    renderContent();
 });
