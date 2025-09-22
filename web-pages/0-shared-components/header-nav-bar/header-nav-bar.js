@@ -1,4 +1,4 @@
-import { getLoginState, getLanguage } from '../utils/shared-functions.js';
+import { getLoginState, getLanguage,getCompanyPublishState,setLanguage } from '../utils/shared-functions.js';
 document.addEventListener('DOMContentLoaded', () => {
     const navContainer = document.getElementById('nav-container-component');
     
@@ -37,11 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <ul class="nav-container-ul">
                         <li class="nav-container-li"><a href="#" class="nav-container-a">${translations[lang].profile}</a></li>
+                        ${!getCompanyPublishState() ? `<li class="nav-container-li"><a href="#" class="nav-container-a">${translations[lang].publish}</a></li>` : ""}
                         <li class="nav-container-li"><a href="#" class="nav-container-a">${translations[lang].logout}</a></li>
                         <li class="nav-container-li lang-toggle">
-                        <button id="lang-btn" class="lang-btn">
-                            <img src="${translations[lang].img}" alt="${translations[lang].flag}" class="lang-flag">
-                        </button>
+                            <button id="lang-btn" class="lang-btn">
+                                <img src="${translations[lang].img}" alt="${translations[lang].flag}" class="lang-flag">
+                            </button>
                         </li>
                     </ul>
                 </nav>`
@@ -57,14 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         <li class="nav-container-li"><a href="#" class="nav-container-a">${translations[lang].login}</a></li>
                         <li class="nav-container-li"><a href="#" class="nav-container-a">${translations[lang].publish}</a></li>
                         <li class="nav-container-li lang-toggle">
-                        <button id="lang-btn" class="lang-btn">
-                            <img src="${translations[lang].img}" alt="${translations[lang].flag}" class="lang-flag">
-                        </button>
+                            <button id="lang-btn" class="lang-btn">
+                                <img src="${translations[lang].img}" alt="${translations[lang].flag}" class="lang-flag">
+                            </button>
                         </li>
                     </ul>
                 </nav>`;
 
         navContainer.innerHTML = navBarContent;
+
     }
 
     // TODO: Use event delegation for all navbar actions (lang toggle, login, logout)
@@ -74,10 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btn) {
             const currentLang = getLanguage();
             const newLang = currentLang === "es" ? "en" : "es";
-            localStorage.setItem("lang", newLang);
+            setLanguage(newLang)
             renderNav();
-            const langChangeEvent = new CustomEvent("languageChange");
-            document.dispatchEvent(langChangeEvent);
         }
     });
 
