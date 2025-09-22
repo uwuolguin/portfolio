@@ -44,3 +44,11 @@
         localStorage.setItem("hasPublishedCompany", hasPublished.toString());
         document.dispatchEvent(new CustomEvent("companyPublishStateChange"));
     }
+
+    export function initStorageListener() {
+        window.addEventListener("storage", (event) => {
+            if (event.key === "lang" || event.key === "isLoggedIn" || event.key === "hasPublishedCompany") {
+                location.reload();
+            }
+        });
+    }

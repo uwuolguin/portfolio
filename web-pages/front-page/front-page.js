@@ -1,5 +1,2 @@
-window.addEventListener("storage", (event) => {
-    if (event.key === "lang" || event.key === "isLoggedIn" || event.key === "hasPublishedCompany") {
-        location.reload();
-    }
-});
+import { initStorageListener } from '../0-shared-components/utils/shared-functions.js';
+initStorageListener();
