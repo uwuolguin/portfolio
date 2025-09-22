@@ -1,4 +1,4 @@
-import { getLoginState, getLanguage } from '../utils/shared-functions.js';
+import { getLanguage } from '../utils/shared-functions.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const footerContainer = document.getElementById('footer-container');

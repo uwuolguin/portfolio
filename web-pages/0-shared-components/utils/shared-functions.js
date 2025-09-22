@@ -9,6 +9,10 @@
         }
         return value === "true";
     }
+    export function setLoginState(hasLogged) {
+        localStorage.setItem("isLoggedIn", hasLogged.toString());
+        document.dispatchEvent(new CustomEvent("userHasLogged"));
+    }
 
     // TODO: In the future, consider storing the language preference in the server-side
     //       session or user profile instead of localStorage for better security.
@@ -19,6 +23,10 @@
             return "es";
         }
         return lang;
+    }
+    export function setLanguage(Lang) {
+        localStorage.setItem("lang", Lang);
+        document.dispatchEvent(new CustomEvent("languageChange"));
     }
     
     // TODO: Replace localStorage-based company publish state with server-side data
@@ -34,6 +42,5 @@
 
     export function setCompanyPublishState(hasPublished) {
         localStorage.setItem("hasPublishedCompany", hasPublished.toString());
-        // Dispatch event for components listening to changes
         document.dispatchEvent(new CustomEvent("companyPublishStateChange"));
     }
