@@ -69,3 +69,22 @@ export function initStorageListener() {
         }
     });
 }
+
+// Get stored company data
+export function getCompanyData() {
+    return JSON.parse(localStorage.getItem('companyData')) || null;
+}
+
+// Set/update company data
+export function setCompanyData(data) {
+    if (data === null) {
+        localStorage.removeItem('companyData');
+        setCompanyPublishState(false);
+    } else {
+        localStorage.setItem('companyData', JSON.stringify(data));
+        setCompanyPublishState(true);
+    }
+    
+    // Dispatch custom event for data change
+    document.dispatchEvent(new CustomEvent('companyDataChange'));
+}
