@@ -99,10 +99,54 @@
 
 .company-image-preview {
     width: 100%;
-    max-width: 200px;
     height: auto;
     border-radius: 5px;
     margin-top: 0.5rem;
+}
+
+/* Profile Action Buttons */
+.profile-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    justify-content: center;
+}
+
+.profile-button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-weight: 500;
+    flex: 1;
+    max-width: 150px;
+}
+
+.update-button {
+    background-color: #FF9800;
+    color: white;
+}
+
+.update-button:hover {
+    background-color: #e68a00;
+    transform: translateY(-2px);
+}
+
+.delete-button {
+    background-color: #d32f2f;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #b71c1c;
+    transform: translateY(-2px);
+}
+
+.profile-button:active {
+    transform: translateY(0);
 }
 
 @media (max-width: 600px) {
@@ -133,5 +177,16 @@
 
     .login-message {
         font-size: 1rem;
+    }
+
+    .profile-actions {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .profile-button {
+        max-width: none;
+        font-size: 0.9rem;
+        padding: 10px 20px;
     }
 }
