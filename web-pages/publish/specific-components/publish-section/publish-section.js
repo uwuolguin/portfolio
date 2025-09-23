@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
             productDescription: "Descripción del producto",
             address: "Dirección",
             phone: "Teléfono de la empresa",
-            companyAddress: "Dirección de la empresa",
+            companyEmail: "Correo de la empresa",
             publishButton: "Publicar",
             selectImage: "📷 Seleccionar imagen de la empresa",
             publishSuccess: "¡Empresa publicada exitosamente!",
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             productDescription: "Product description",
             address: "Address",
             phone: "Company phone",
-            companyAddress: "Company address",
+            companyEmail: "Company email",
             publishButton: "Publish",
             selectImage: "📷 Select company image",
             publishSuccess: "Company published successfully!",
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <input type="tel" id="phone" class="publish-input" placeholder="${t.phone}" required>
                     </div>
                     <div class="input-group">
-                        <input type="text" id="companyAddress" class="publish-input" placeholder="${t.companyAddress}" required>
+                        <input type="text" id="companyEmail" class="publish-input" placeholder="${t.companyEmail}" required>
                     </div>
                     <div class="input-group">
                         <div class="file-input-wrapper">
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 formData.append('productDescription', document.getElementById("productDescription").value);
                 formData.append('address', document.getElementById("address").value);
                 formData.append('phone', document.getElementById("phone").value);
-                formData.append('companyAddress', document.getElementById("companyAddress").value);
+                formData.append('companyEmail', document.getElementById("companyEmail").value);
                 
                 const imageFile = document.getElementById("companyImage").files[0];
                 if (imageFile) {
@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         productDescription: document.getElementById("productDescription").value,
                         address: document.getElementById("address").value,
                         phone: document.getElementById("phone").value,
-                        companyAddress: document.getElementById("companyAddress").value,
+                        companyEmail: document.getElementById("companyEmail").value,
                         companyImage: imageFile || null,
                     });
                     
