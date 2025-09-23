@@ -14,7 +14,6 @@
     text-align: center;
     margin-top: 80px;
     margin-bottom: 80px;
-    padding-bottom: 4rem; 
 }
 
 .publish-title {
@@ -34,6 +33,11 @@
 .input-group {
     width: 100%;
     position: relative;
+    transition: margin-bottom 0.3s ease;
+}
+
+.input-group.dropdown-open {
+    margin-bottom: 200px;
 }
 
 .publish-input, .publish-textarea, .publish-select {
@@ -110,7 +114,7 @@
     border: 1px solid #4a546d;
     border-radius: 0 0 5px 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    z-index: 99999;
+    z-index: 9999;
     max-height: 200px;
     overflow: hidden;
 }

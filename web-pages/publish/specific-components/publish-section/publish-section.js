@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return dropdownHTML;
     }
 
-    // Initialize dropdown functionality
+    // Initialize dropdown functionality with dynamic push
     function initDropdowns() {
         const dropdowns = document.querySelectorAll('.filterable-dropdown');
         
@@ -85,9 +85,18 @@ document.addEventListener('DOMContentLoaded', () => {
             
             selected.addEventListener('click', (e) => {
                 e.stopPropagation();
+                
+                // Close all dropdowns first and remove open classes
                 document.querySelectorAll('.dropdown-options').forEach(opt => opt.style.display = 'none');
-                options.style.display = options.style.display === 'block' ? 'none' : 'block';
+                document.querySelectorAll('.input-group').forEach(group => group.classList.remove('dropdown-open'));
+                
+                // Toggle current dropdown
                 if (options.style.display === 'block') {
+                    options.style.display = 'none';
+                    dropdown.closest('.input-group').classList.remove('dropdown-open');
+                } else {
+                    options.style.display = 'block';
+                    dropdown.closest('.input-group').classList.add('dropdown-open');
                     search.focus();
                     search.value = '';
                     allOptions.forEach(opt => opt.style.display = 'block');
@@ -107,15 +116,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     selected.innerHTML = `${option.textContent} <span class="dropdown-arrow">▼</span>`;
                     selected.setAttribute('data-value', option.getAttribute('data-value'));
                     options.style.display = 'none';
+                    dropdown.closest('.input-group').classList.remove('dropdown-open');
                 });
             });
             
             options.addEventListener('click', (e) => e.stopPropagation());
         });
         
+        // Close dropdowns when clicking outside
         document.addEventListener('click', () => {
             document.querySelectorAll('.dropdown-options').forEach(options => {
                 options.style.display = 'none';
+            });
+            document.querySelectorAll('.input-group').forEach(group => {
+                group.classList.remove('dropdown-open');
             });
         });
     }
