@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
             alreadyPublished: "Ya has publicado una empresa.",
             viewProfile: "Ver mi perfil",
             alreadyPublishedMessage: "Tu empresa ya está publicada.",
-            places: ["Todas Las Comunas", "La Florida", "Lo Curro", "Los Troncos", "Otra"],
-            products: ["Todos Los Productos", "Fiambrería", "Lácteos", "Legumbres", "Otro"],
+            places: ["La Florida", "Lo Curro", "Los Troncos","aaa","bbb","ccc", "Otra"],
+            products: ["Fiambrería", "Lácteos", "Legumbres",,"aaa","bbb","ccc",  "Otro"],
             searchCommunePlaceholder: "Buscar comuna...",
             searchProductPlaceholder: "Buscar producto..."
         },
@@ -45,8 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
             alreadyPublished: "You have already published a company.",
             viewProfile: "View my profile",
             alreadyPublishedMessage: "Your company is already published.",
-            places: ["All Communes", "La Florida", "Lo Curro", "Los Troncos", "Other"],
-            products: ["All Products", "Fiambrería", "Dairy", "Legumes", "Other"],
+            places: ["La Florida", "Lo Curro", "Los Troncos",,"aaa","bbb","ccc",  "Other"],
+            products: ["Fiambrería", "Dairy", "Legumes", ,"aaa","bbb","ccc", "Other"],
             searchCommunePlaceholder: "Search commune...",
             searchProductPlaceholder: "Search product..."
         }
