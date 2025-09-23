@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
             address: "Dirección",
             phone: "Teléfono de la empresa",
             companyEmail: "Correo de la empresa",
+            commune: "Comuna",
+            productType: "Tipo de producto",
             publishButton: "Publicar",
             selectImage: "📷 Seleccionar imagen de la empresa",
             publishSuccess: "¡Empresa publicada exitosamente!",
@@ -19,7 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
             loginHere: "Inicia sesión aquí",
             alreadyPublished: "Ya has publicado una empresa.",
             viewProfile: "Ver mi perfil",
-            alreadyPublishedMessage: "Tu empresa ya está publicada."
+            alreadyPublishedMessage: "Tu empresa ya está publicada.",
+            places: ["Todas Las Comunas", "La Florida", "Lo Curro", "Los Troncos", "Otra"],
+            products: ["Todos Los Productos", "Fiambrería", "Lácteos", "Legumbres", "Otro"]
         },
         en: {
             title: "Publish your company",
@@ -28,6 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
             address: "Address",
             phone: "Company phone",
             companyEmail: "Company email",
+            commune: "Commune",
+            productType: "Product type",
             publishButton: "Publish",
             selectImage: "📷 Select company image",
             publishSuccess: "Company published successfully!",
@@ -36,7 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
             loginHere: "Log in here",
             alreadyPublished: "You have already published a company.",
             viewProfile: "View my profile",
-            alreadyPublishedMessage: "Your company is already published."
+            alreadyPublishedMessage: "Your company is already published.",
+            places: ["All Communes", "La Florida", "Lo Curro", "Los Troncos", "Other"],
+            products: ["All Products", "Fiambrería", "Dairy", "Legumes", "Other"]
         }
     };
 
@@ -81,6 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const lang = getLanguage();
         const t = translations[lang];
 
+        const communeOptions = t.places.map(place => `<option value="${place}">${place}</option>`).join('');
+        const productOptions = t.products.map(product => `<option value="${product}">${product}</option>`).join('');
+
         publishSection.innerHTML = `
             <div class="publish-container">
                 <h2 class="publish-title">${t.title}</h2>
@@ -107,6 +118,18 @@ document.addEventListener('DOMContentLoaded', () => {
                                 ${t.selectImage}
                             </label>
                         </div>
+                    </div>                    
+                    <div class="input-group">
+                        <select id="commune" class="publish-select" required>
+                            <option value="">${t.commune}</option>
+                            ${communeOptions}
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <select id="productType" class="publish-select" required>
+                            <option value="">${t.productType}</option>
+                            ${productOptions}
+                        </select>
                     </div>
                     <button type="submit" class="publish-button">${t.publishButton}</button>
                 </form>
@@ -128,6 +151,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const formData = new FormData();
                 formData.append('companyName', document.getElementById("companyName").value);
                 formData.append('productDescription', document.getElementById("productDescription").value);
+                formData.append('commune', document.getElementById("commune").value);
+                formData.append('productType', document.getElementById("productType").value);
                 formData.append('address', document.getElementById("address").value);
                 formData.append('phone', document.getElementById("phone").value);
                 formData.append('companyEmail', document.getElementById("companyEmail").value);
@@ -147,6 +172,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.log("Publishing data:", {
                         companyName: document.getElementById("companyName").value,
                         productDescription: document.getElementById("productDescription").value,
+                        commune: document.getElementById("commune").value,
+                        productType: document.getElementById("productType").value,
                         address: document.getElementById("address").value,
                         phone: document.getElementById("phone").value,
                         companyEmail: document.getElementById("companyEmail").value,

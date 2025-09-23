@@ -34,7 +34,7 @@
     width: 100%;
 }
 
-.publish-input, .publish-textarea {
+.publish-input, .publish-textarea, .publish-select {
     width: calc(100% - 20px);
     padding: 10px;
     border: none;
@@ -48,13 +48,18 @@
 
 .publish-input::placeholder,
 .publish-textarea::placeholder {
-    color: #a0a0a0;
+    color: white;
 }
 
-.publish-input:focus, .publish-textarea:focus {
+.publish-input:focus, .publish-textarea:focus, .publish-select:focus {
     outline: none;
     background-color: #4a546d;
     box-shadow: 0 0 0 2px #FF9800;
+}
+
+.publish-select option {
+    background-color: #3b455b;
+    color: #ffffff;
 }
 
 .publish-textarea {
@@ -178,6 +183,7 @@
 
     .publish-input,
     .publish-textarea,
+    .publish-select,
     .file-input-label {
         font-size: 0.8rem;
     }
