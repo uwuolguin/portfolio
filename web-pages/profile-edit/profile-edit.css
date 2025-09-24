@@ -7,6 +7,10 @@ body {
 main {
   flex-grow: 1;
 }
+html {
+  overflow-x: hidden;
+}
+
 .front-page-body {
   background-color: #f5f6fa;
   font-family: Arial, sans-serif;

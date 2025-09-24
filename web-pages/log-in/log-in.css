@@ -3,6 +3,10 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
+html {
+  overflow-x: hidden;
+}
+
 
 main {
   flex-grow: 1;
