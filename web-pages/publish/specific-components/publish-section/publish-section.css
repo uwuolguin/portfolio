@@ -104,7 +104,9 @@
     color: #ffffff;
     transition: transform 0.2s ease;
 }
-
+.dropdown-selected:hover .dropdown-arrow {
+    transform: rotate(180deg);
+}
 .dropdown-options {
     position: absolute;
     top: 100%;
