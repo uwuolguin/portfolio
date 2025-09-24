@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
             productDescription: "Descripción del producto",
             address: "Dirección",
             phone: "Teléfono de la empresa",
-            companyAddress: "Dirección de la empresa",
+            companyEmail: "Correo de la empresa",
+            commune: "Comuna",
+            productType: "Tipo de producto",
             companyImage: "Imagen de la empresa",
             loginRequired: "Debes iniciar sesión para ver tu perfil.",
             loginHere: "Inicia sesión aquí",
@@ -30,7 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
             productDescription: "Product description",
             address: "Address",
             phone: "Company phone",
-            companyAddress: "Company address",
+            companyEmail: "Company email",
+            commune: "Commune",
+            productType: "Product type",
             companyImage: "Company image",
             loginRequired: "You must log in to view your profile.",
             loginHere: "Log in here",
@@ -49,14 +53,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mock user data - In a real app, this would come from an API
     const mockUserData = {
         name: "Juan Pérez",
-        email: "juan.perez@email.com",
-        companyName: "Tecnología Avanzada SPA",
-        productDescription: "Desarrollamos soluciones tecnológicas innovadoras para empresas modernas, incluyendo software personalizado, aplicaciones móviles y sistemas de gestión empresarial.",
-        address: "Av. Providencia 1234, Santiago",
-        phone: "+56 9 8765 4321",
-        companyAddress: "Av. Providencia 1234, Oficina 501, Providencia, Santiago",
-        companyImage: "../../../logos-pictures/pictures/background-picture.jpg"
+        email: "juan.perez@email.com"
     };
+
+    // Mock company data with example image for demonstration
+    const mockCompanyDataWithImage = {
+        companyName: "Panadería El Buen Pan",
+        productDescription: "Elaboramos pan artesanal fresco todos los días, con ingredientes naturales y recetas tradicionales. Especialistas en pan integral, pasteles y productos de repostería.",
+        address: "Av. Los Leones 1234, Providencia",
+        phone: "+56 9 8765 4321",
+        companyEmail: "contacto@elbuenpan.cl",
+        commune: "Providencia",
+        productType: "Panadería",
+        companyImageBase64: "https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+    };
+
+    // Function to get published company data
+    function getPublishedCompanyData() {
+        const stored = localStorage.getItem('publishedCompanyData');
+        return stored ? JSON.parse(stored) : null;
+    }
 
     function handleUpdateProfile() {
         const lang = getLanguage();
@@ -71,9 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (confirm(t.confirmDelete)) {
             try {
                 console.log("Deleting profile...");
-                alert(t.profileDeleted);
+                // Clear published company data
+                localStorage.removeItem('publishedCompanyData');
                 localStorage.setItem("isLoggedIn", "false");
                 localStorage.setItem("hasPublishedCompany", "false");
+                alert(t.profileDeleted);
                 location.reload();
             } catch (error) {
                 console.error('Error deleting profile:', error);
@@ -125,6 +143,11 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         } else {
             // Case 3: User logged in and has published a company
+            const companyData = getPublishedCompanyData();
+            
+            // Use mock data with example image if no real data exists (for demonstration)
+            const displayData = companyData || mockCompanyDataWithImage;
+            
             profileSection.innerHTML = `
                 <div class="profile-container">
                     <h2 class="profile-title">${t.title}</h2>
@@ -137,33 +160,43 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="profile-info">
                             <div class="info-item">
                                 <label class="info-label">${t.companyName}</label>
-                                <div class="info-value">${mockUserData.companyName || t.noData}</div>
+                                <div class="info-value">${displayData?.companyName || t.noData}</div>
                             </div>
                             
                             <div class="info-item">
                                 <label class="info-label">${t.productDescription}</label>
-                                <div class="info-value">${mockUserData.productDescription || t.noData}</div>
+                                <div class="info-value">${displayData?.productDescription || t.noData}</div>
                             </div>
                             
                             <div class="info-item">
                                 <label class="info-label">${t.address}</label>
-                                <div class="info-value">${mockUserData.address || t.noData}</div>
+                                <div class="info-value">${displayData?.address || t.noData}</div>
                             </div>
                             
                             <div class="info-item">
                                 <label class="info-label">${t.phone}</label>
-                                <div class="info-value">${mockUserData.phone || t.noData}</div>
+                                <div class="info-value">${displayData?.phone || t.noData}</div>
                             </div>
                             
                             <div class="info-item">
-                                <label class="info-label">${t.companyAddress}</label>
-                                <div class="info-value">${mockUserData.companyAddress || t.noData}</div>
+                                <label class="info-label">${t.companyEmail}</label>
+                                <div class="info-value">${displayData?.companyEmail || t.noData}</div>
+                            </div>
+                            
+                            <div class="info-item">
+                                <label class="info-label">${t.commune}</label>
+                                <div class="info-value">${displayData?.commune || t.noData}</div>
+                            </div>
+                            
+                            <div class="info-item">
+                                <label class="info-label">${t.productType}</label>
+                                <div class="info-value">${displayData?.productType || t.noData}</div>
                             </div>
                             
                             <div class="info-item">
                                 <label class="info-label">${t.companyImage}</label>
-                                ${mockUserData.companyImage ? `
-                                    <img src="${mockUserData.companyImage}" alt="Company Image" class="company-image-preview">
+                                ${displayData?.companyImageBase64 ? `
+                                    <img src="${displayData.companyImageBase64}" alt="Company Image" class="company-image-preview">
                                 ` : `
                                     <div class="info-value">${t.noData}</div>
                                 `}
@@ -192,6 +225,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Listen for company data updates
+    document.addEventListener('companyDataUpdated', renderProfileContent);
     document.addEventListener("languageChange", renderProfileContent);
     document.addEventListener("userHasLogged", renderProfileContent);
     document.addEventListener("companyPublishStateChange", renderProfileContent);
