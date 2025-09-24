@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const translations = {
             es: {
-                profile: "Perfil",
+                profileView: "Ver perfil",
+                companyEdit: "Editar empresa",
                 logout: "Cerrar sesión",
                 register: "Regístrate",
                 login: "Inicia sesión",
@@ -13,7 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 img: "../../logos-pictures/logos/us.svg"
             },
             en: {
-                profile: "Profile",
+                profileView: "See profile",
+                companyEdit: "Edit company",
                 logout: "Log out",
                 register: "Sign up",
                 login: "Log in",
@@ -36,7 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         </a>
                     </div>
                     <ul class="nav-container-ul">
-                        <li class="nav-container-li"><a href="#" class="nav-container-a">${translations[lang].profile}</a></li>
+                        <li class="nav-container-li"><a href="#" class="nav-container-a">${translations[lang].profileView}</a></li>
+                        ${getCompanyPublishState() ? `<li class="nav-container-li"><a href="#" class="nav-container-a">${translations[lang].companyEdit}</a></li>` : ""}
                         ${!getCompanyPublishState() ? `<li class="nav-container-li"><a href="#" class="nav-container-a">${translations[lang].publish}</a></li>` : ""}
                         <li class="nav-container-li"><a href="#" class="nav-container-a">${translations[lang].logout}</a></li>
                         <li class="nav-container-li lang-toggle">
