@@ -73,6 +73,7 @@
     .footer-links {
         flex-direction: row;
         flex-wrap: nowrap;
+        white-space:unset;
         overflow-x: auto;
     }
 
